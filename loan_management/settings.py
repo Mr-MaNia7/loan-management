@@ -131,3 +131,8 @@ CACHES = {
         'LOCATION': 'default-cache',
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'loan_management.backends.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
