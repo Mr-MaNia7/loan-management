@@ -11,7 +11,7 @@
       {% if user.is_authenticated %}
         <h1 class="my-3 text-center">Welcome, @{{ user.username }}</h1>
       {% else %}
-        <p><a href="{% url 'login' %}">Login</a> to view your profile.</p>
+        <p class="text-center"><a href="{% url 'login' %}">Login</a> to view your profile.</p>
       {% endif %}
     </main>
 

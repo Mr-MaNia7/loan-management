@@ -1,13 +1,12 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import ListView
 from django.views import View
 from .models import User
-from .forms import UserCreationForm, UserRegistrationForm
+from .forms import UserCreateForm, UserRegistrationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 
 
 def showHomeView(request):
@@ -40,7 +39,6 @@ def loginView(request):
             user = authenticate(request=request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                print(next_url)
                 if next_url:
                     return redirect(next_url)
                 else:
@@ -60,11 +58,23 @@ def userDetailView(request, pk):
 def editUser(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == "POST": 
-        form = UserCreationForm(request.POST, instance=user)
+        form = UserCreateForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request,'The user has been updated successfully!')
-        return redirect('user-list')
+        return redirect('home')
+    else:
+        form = UserCreateForm(instance=user)
+        return render(request,'edit_user.html', {'form': form})
+
+def editSecurity(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == "POST": 
+        form = UserCreationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'The security has been updated successfully!')
+        return redirect('home')
     else:
         form = UserCreationForm(instance=user)
         return render(request,'edit_user.html', {'form': form})
@@ -74,4 +84,4 @@ def deleteUser(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()
     messages.success(request,  'The user has been deleted successfully!')
-    return redirect('user-list')
+    return redirect('home')

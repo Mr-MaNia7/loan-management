@@ -25,7 +25,8 @@
             <li class="list-group-item"> User Type - <b> {% if user.is_staff %} Admin User {% else %} Regular User</b> {% endif %}</li>
           </ul>
           <div class="card-body">
-            <a href="{% url 'edit-user' pk=user.user_id %}" class="">Edit Profile</a>
+            <a href="{% url 'edit-user' pk=user.user_id %}" class="me-2">Edit Profile</a>
+            <a href="{% url 'security' pk=user.user_id %}" class="">Edit Security</a>
           </div>
 
           <div class="card-footer text-muted">

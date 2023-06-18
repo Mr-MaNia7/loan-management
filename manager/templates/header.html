@@ -63,8 +63,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li>
-                    {% comment %} <a class="dropdown-item" href="{% url 'edit-user' pk=user.user_id %}">My profile</a> {% endcomment %}
-                    {{user.user_id}}
+                    <a class="dropdown-item" href="{% url 'detail-view' pk=user.user_id %}">My profile</a>
+                    <a class="dropdown-item" href="{% url 'edit-user' pk=user.user_id %}">Edit profile</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
