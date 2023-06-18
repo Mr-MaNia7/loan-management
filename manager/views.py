@@ -1,30 +1,83 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import ListView
+from django.views import View
 from .models import User
+from .forms import UserCreationForm, UserRegistrationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def showHomeView(request):
     return render(request, "index.html")
 
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
+
+def registerUser(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            print('valid')
+            form.save()
+            return redirect('login')
+        else:
+            print(form.errors)
+    form = UserRegistrationForm()
+    return render(request, 'user_create.html', {'form': form})
+
+def loginView(request):
+    next_url = request.GET.get('next')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request=request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print(next_url)
+                if next_url:
+                    return redirect(next_url)
+                else:
+                    return redirect('home')
+        else:
+            print("ERRORS: ", form.errors)
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+@method_decorator(login_required, name='dispatch')
 class UserListView(ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'users'
 
-class UserCreateView(CreateView):
-    model = User
-    template_name = 'user_create.html'
-    fields = ['username', 'email', 'first_name', 'last_name']
-    success_url = reverse_lazy('user_list')
+@login_required
+def userDetailView(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    return render(request, 'user_detail.html', {'user': user})        
 
-class UserUpdateView(UpdateView):
-    model = User
-    template_name = 'user_update.html'
-    fields = ['username', 'email', 'first_name', 'last_name']
-    success_url = reverse_lazy('user_list')
+@login_required
+def editUser(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == "POST": 
+        form = UserCreationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'The user has been updated successfully!')
+        return redirect('user-list')
+    else:
+        form = UserCreationForm(instance=user)
+        return render(request,'edit_user.html', {'form': form})
 
-class UserDeleteView(DeleteView):
-    model = User
-    template_name = 'user_delete.html'
-    success_url = reverse_lazy('user_list')
+@login_required
+def deleteUser(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    messages.success(request,  'The user has been deleted successfully!')
+    return redirect('user-list')

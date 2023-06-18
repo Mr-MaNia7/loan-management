@@ -2,33 +2,78 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Users | Onradar</title>
+  <title>Users | OnRadar</title>
 </head>
-<body class="container-fluid">
+<body>
   {% include 'header.html' %}
-  <main>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
+  <div class="container-fluid my-5">
+    <button class="btn btn-primary float-end">
+      <a class="text-decoration-none link-light" href="{% url 'register' %}"><i class="fa-solid fa-plus"></i> New User</a>
+    </button>
+    <h1 class="text-center">Users List</h1>
+    <div class="d-flex justify-content-center">
+      <table class="table">
+        <thead>
           <tr>
-            <th scope="row">{{user.user_id}}</th>
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>@{{user.username}}</td>
-            <td>{{user.email}}</td>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Email</th>
+            <th scope="col">Edit/Delete</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </main>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <th scope="row">{{user.user_id}}</th>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>@{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                <a class="me-2" href="{% url 'edit-user' pk=user.user_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                <a class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-user-id={{user.user_id}}><i class="fa-solid fa-trash"></i> Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this user?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">
+            <a href="#" class="link-light text-decoration-none"><i class="fa-solid fa-trash"></i> Delete</a>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    const modal = document.getElementById('deleteConfirmation')
+    modal.addEventListener('show.bs.modal', event => {
+      const relatedButton = event.relatedTarget
+      const id = relatedButton.getAttribute('data-bs-user-id')
+      deleteButton = modal.querySelector('.modal-footer button a')
+      deleteButton.href = `/users/delete/${id}`
+    })
+  </script>
+
 </body>
 </html>

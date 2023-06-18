@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Your Profile - {{user.username}} | On Radar</title>
+</head>
+<body>
+  {% include 'header.html' %}
+  
+  <div class="container-fluid my-5">
+    <div class="container">
+      <h2 class="text-center">Profile Information</h2>
+      
+      <div class="d-flex justify-content-center">
+        <div class="card text-center" style="width: 30rem;">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fa-solid fa-user-tie fa-xl"></i> {{user.first_name}} {{user.last_name}}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">User name - <b>@{{user.username}}</b></li>
+            <li class="list-group-item">First name - <b>@{{user.first_name}}</b></li>
+            <li class="list-group-item">Last name - <b>@{{user.last_name}}</b></li>
+            <li class="list-group-item">Email - <b>{{user.email}}</b></li>
+            <li class="list-group-item">Active - <b>{{user.is_active}}</b></li>
+            <li class="list-group-item"> User Type - <b> {% if user.is_staff %} Admin User {% else %} Regular User</b> {% endif %}</li>
+          </ul>
+          <div class="card-body">
+            <a href="{% url 'edit-user' pk=user.user_id %}" class="">Edit Profile</a>
+          </div>
+
+          <div class="card-footer text-muted">
+            Joined at {{user.created_at}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+</body>
+</html>
