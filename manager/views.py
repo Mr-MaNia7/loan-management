@@ -51,12 +51,6 @@ def loginView(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-@method_decorator(login_required, name='dispatch')
-class UserListView(ListView):
-    model = User
-    template_name = 'user_list.html'
-    context_object_name = 'users'
-
 @login_required
 def userDetailView(request, pk):
     user = get_object_or_404(User, pk=pk)
