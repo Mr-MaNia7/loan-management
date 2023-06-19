@@ -28,5 +28,11 @@ urlpatterns = [
     path('users/delete/<int:pk>', views.deleteUser, name='delete-user'),
     path('users/<int:pk>', views.userDetailView, name='detail-view'),
     path('users/security/<int:pk>', views.editSecurity, name='security'),
+   
+    path('accounts/', views.accountListView, name='accounts'),
+    path('accounts/<int:pk>', views.accountDetailView, name = 'detail-account'),
+    path('accounts/create/', views.createAccount, name='create-account'),
+    path('accounts/edit/<int:pk>', views.editAccount, name='edit-account'),
+    path('accounts/delete/<int:pk>', views.deleteAccount, name='delete-account'),
 
 ]

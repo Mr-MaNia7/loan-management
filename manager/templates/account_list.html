@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Accounts | OnRadar</title>
+</head>
+<body>
+  {% include 'header.html' %}
+
+  <div class="container-fluid my-5">
+    <button class="btn btn-primary float-end me-5">
+      <a class="text-decoration-none link-light" href="{% url 'create-account' %}"><i class="fa-solid fa-plus"></i> New Account</a>
+    </button>
+    <h1 class="text-center">Accounts List</h1>
+    <div class="d-flex justify-content-center">
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Balance</th>
+              <th scope="col">Interest</th>
+              <th scope="col">User</th>
+              <th scope="col">Edit/Delete</th>
+              <th scope="col">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for account in accounts %}
+              <tr>
+                <th scope="row">{{account.account_id}}</th>
+                <td><a href="{% url 'detail-account' pk=account.account_id %}" class="text-decoration-none link-dark">{{account.name}}</a></td>
+                <td>{{account.type}}</td>
+                <td>{{account.balance}}</td>
+                <td>{{account.interest_rate}}</td>
+                <td>{{account.user_id}}</td>
+                <td>
+                  <a class="me-2" href="{% url 'edit-account' pk=account.account_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                  <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-account' pk=account.account_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                </td>
+                <td><a class="me-2" href="{% url 'detail-account' pk=account.account_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="text-center">
+          <a href="{% url 'home' %}" class="text-decoration-none btn btn-primary me-2">Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this account?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">
+            <a href="#" class="link-light text-decoration-none"><i class="fa-solid fa-trash"></i> Delete</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    const modal = document.getElementById('deleteConfirmation')
+    modal.addEventListener('show.bs.modal', event => {
+      const relatedButton = event.relatedTarget
+      const link = relatedButton.getAttribute('data-bs-link')
+      deleteButton = modal.querySelector('.modal-footer button a')
+      deleteButton.href = link
+    })
+  </script>
+
+</body>
+</html>

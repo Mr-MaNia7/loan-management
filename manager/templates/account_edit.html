@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Edit User - {{form.instance.username}} | OnRadar</title>
+  <title>Edit Account - {{form.instance.name}} | On Radar</title>
 </head>
 <body>
+
   {% include 'header.html' %}
-  
+
   <div class="container-fluid my-5">
-    <h1 class="text-center mb-3">Edit User - @{{form.instance.username}}</h1>
+    <h1 class="text-center mb-3">Edit Account</h1>
     <div class="d-flex justify-content-center">
       <div class="card" style="width: 30rem;">
         <form method='post'> 
@@ -17,6 +18,7 @@
             {{ form.as_p }}
           </div>
           <div class="card-footer d-flex justify-content-around">
+            <a href="{% url 'accounts' %}" class="text-decoration-none btn btn-secondary me-2">Cancel</a>
             <input class="btn btn-primary" type="submit" value="Submit">
           </div>
         </form>
@@ -25,6 +27,6 @@
   </div>
 
   {% include 'footer.html' %}
-  
+
 </body>
 </html>

@@ -2,39 +2,42 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Your Profile - {{user.username}} | On Radar</title>
+  <title>Account Detail - {{account.name}} | On Radar</title>
 </head>
 <body>
   {% include 'header.html' %}
   
   <div class="container-fluid my-5">
     <div class="container">
-      <h2 class="text-center">Profile Information</h2>
+      <h2 class="text-center">Account Information</h2>
       
       <div class="d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-user-tie fa-xl"></i> {{user.first_name}} {{user.last_name}}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{account.name}}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">User name - <b>@{{user.username}}</b></li>
-            <li class="list-group-item">First name - <b>@{{user.first_name}}</b></li>
-            <li class="list-group-item">Last name - <b>@{{user.last_name}}</b></li>
-            <li class="list-group-item">Email - <b>{{user.email}}</b></li>
-            <li class="list-group-item">Active - <b>{{user.is_active}}</b></li>
-            <li class="list-group-item"> User Type - <b> {% if user.is_staff %} Admin User {% else %} Regular User</b> {% endif %}</li>
+            <li class="list-group-item">Account name - <b>@{{account.name}}</b></li>
+            <li class="list-group-item">Account type - <b>@{{account.type}}</b></li>
+            <li class="list-group-item">Balance - <b>${{account.balance}}</b></li>
+            <li class="list-group-item">Interest - <b>{{account.interest_rate}}</b></li>
+            <li class="list-group-item">User - <b>{{account.user_id}}</b></li>
           </ul>
           <div class="card-body">
-            <a href="{% url 'edit-user' pk=user.user_id %}" class="me-2">Edit Profile</a>
-            <a href="{% url 'security' pk=user.user_id %}" class="">Edit Security</a>
+            <a href="{% url 'edit-account' pk=account.account_id %}" class="me-2">Edit Account</a>
           </div>
 
           <div class="card-footer text-muted">
-            Joined at {{user.created_at}}
+            <div>
+              Joined at - {{account.created_at}}
+            </div>
+            <div>
+              Last updated at - {{account.updated_at}}
+            </div>
           </div>
           <div class="card-footer text-muted">
-            <a href="{% url 'home' %}" class="text-decoration-none btn btn-secondary me-2">Cancel</a>
-            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-user' pk=user.user_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-account-id={{user.user_id}}>Delete Your Account</a>
+            <a href="{% url 'accounts' %}" class="text-decoration-none btn btn-primary me-2">Accounts</a>
+            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-account' pk=account.account_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Account</a>
           </div>
         </div>
       </div>
@@ -49,7 +52,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete your account?</p>
+          <p>Are you sure you want to permanently delete this account?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
