@@ -72,3 +72,8 @@ class ReportCreationForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ['user', 'name', 'description', 'start_date', 'end_date']
+    
+        widgets = {
+            'start_date': DateInput(attrs={'type': 'date'}),
+            'end_date': DateInput(attrs={'type': 'date'}),
+        }

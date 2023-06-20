@@ -9,7 +9,7 @@
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-report' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-report' %}"><i class="fa-solid fa-plus"></i> ADD REPORT</a>
     </div>
     <h1 class="text-center">Reports List</h1>
     {% if reports %}
@@ -20,10 +20,10 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Interest</th>
                 <th scope="col">User</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
@@ -33,10 +33,10 @@
                 <tr>
                   <th scope="row">{{report.report_id}}</th>
                   <td><a href="{% url 'detail-report' pk=report.report_id %}" class="text-decoration-none link-dark">{{report.name}}</a></td>
-                  <td>{{report.type}}</td>
-                  <td>{{report.balance}}</td>
-                  <td>{{report.interest_rate}}</td>
-                  <td>{{report.user_id}}</td>
+                  <td>{{report.user}}</td>
+                  <td>{{report.description}}</td>
+                  <td>{{report.start_date}}</td>
+                  <td>{{report.end_date}}</td>
                   <td>
                     <a class="me-2" href="{% url 'edit-report' pk=report.report_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
                     <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-report' pk=report.report_id %}"><i class="fa-solid fa-trash"></i> Delete</a>

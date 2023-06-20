@@ -14,14 +14,13 @@
       <div class="d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{report.name}}</h5>
+            <h5 class="card-title">{{report.name}}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Report name - <b>@{{report.name}}</b></li>
-            <li class="list-group-item">Report type - <b>@{{report.type}}</b></li>
-            <li class="list-group-item">Balance - <b>${{report.balance}}</b></li>
-            <li class="list-group-item">Interest - <b>{{report.interest_rate}}</b></li>
-            <li class="list-group-item">User - <b>{{report.user_id}}</b></li>
+            <li class="list-group-item">Report user - <b>@{{report.user}}</b></li>
+            <li class="list-group-item">Description - <b>${{report.description}}</b></li>
+            <li class="list-group-item">Start Date - <b>{{report.start_date}}</b></li>
+            <li class="list-group-item">End Date - <b>{{report.end_date}}</b></li>
           </ul>
           <div class="card-body">
             <a href="{% url 'edit-report' pk=report.report_id %}" class="me-2">Edit Report</a>
@@ -30,9 +29,6 @@
           <div class="card-footer text-muted">
             <div>
               Created at - {{report.created_at}}
-            </div>
-            <div>
-              Last updated at - {{report.updated_at}}
             </div>
           </div>
           <div class="card-footer text-muted">
