@@ -9,7 +9,7 @@
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-reminder' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-reminder' %}"><i class="fa-solid fa-plus"></i> ADD REMINDER</a>
     </div>
     <h1 class="text-center">Reminders List</h1>
     {% if reminders %}
@@ -20,10 +20,9 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Interest</th>
                 <th scope="col">User</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
@@ -33,10 +32,9 @@
                 <tr>
                   <th scope="row">{{reminder.reminder_id}}</th>
                   <td><a href="{% url 'detail-reminder' pk=reminder.reminder_id %}" class="text-decoration-none link-dark">{{reminder.name}}</a></td>
-                  <td>{{reminder.type}}</td>
-                  <td>{{reminder.balance}}</td>
-                  <td>{{reminder.interest_rate}}</td>
-                  <td>{{reminder.user_id}}</td>
+                  <td>{{reminder.user}}</td>
+                  <td>{{reminder.description}}</td>
+                  <td>{{reminder.date}}</td>
                   <td>
                     <a class="me-2" href="{% url 'edit-reminder' pk=reminder.reminder_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
                     <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-reminder' pk=reminder.reminder_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
