@@ -9,7 +9,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 def showHomeView(request):
-    return render(request, "index.html")
+    accounts = Account.objects.all()
+    context = {'accounts': accounts}
+    return render(request, "index.html", context)
 
 def registerUser(request):
     if request.method == 'POST':

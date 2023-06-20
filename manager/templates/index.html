@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +11,83 @@
     <main class="container-fluid">
       {% if user.is_authenticated %}
         {% if not user.is_superuser %}
-          <h1 class="my-3 text-center">Welcome, @{{ user.username }}</h1>
+          <h1 class="mt-5 text-center">Welcome, @{{ user.username }}</h1>
         {% endif %}
       {% else %}
-        <p class="text-center"><a href="{% url 'login' %}">Login</a> to view your profile.</p>
+        <h3 class="text-center mt-5"><a href="{% url 'login' %}">Login</a> to view your profile.</h3>
       {% endif %}
+      
+      <div class="border border-primary rounded my-5 pb-5 px-5 mx-3">
+        <h1 class="text-center">Accounts</h1>
+        <div class="row justify-content-between">
+          {% for account in accounts %}
+            <div class="col-4">
+              <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="fa-solid fa-file-invoice fa-lg"></i> Account Name - {{account.name}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Type - <b>{{account.type}}</b></li>
+                  <li class="list-group-item">Balance - <b>${{account.balance}}</b></li>
+                </ul>
+                <div class="card-footer text-muted">
+                  <div>
+                    Last updated at - {{account.updated_at}}
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  <a href="{% url 'edit-account' pk=account.account_id %}" class="text-decoration-none btn btn-primary me-2">Edit</a>
+                  <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-account' pk=account.account_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          <div class="col-4">
+            <div class="card text-center" style="width: 18rem;">
+              <a href="{% url 'create-account' %}">
+                <img src="{% static '/images/plus.png' %}" class="card-img-top img-fluid" alt="Add Account" style="height: 13rem; width: 13rem;">
+              </a>
+              <div class="card-body">
+                <a href="{% url 'create-account' %}" class="link-primary">Add Account</a>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
+    <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to permanently delete this account?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger">
+              <a href="#" class="link-light text-decoration-none"><i class="fa-solid fa-trash"></i> Delete</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {% include 'footer.html' %}
+
+    <script>
+      const modal = document.getElementById('deleteConfirmation')
+      modal.addEventListener('show.bs.modal', event => {
+        const relatedButton = event.relatedTarget
+        const link = relatedButton.getAttribute('data-bs-link')
+        deleteButton = modal.querySelector('.modal-footer button a')
+        deleteButton.href = link
+      })
+    </script>
 
 </body>
 </html>
