@@ -323,3 +323,178 @@ def goalDetailView(request, pk):
     print('YES')
     goal = get_object_or_404(Goal, pk=pk)
     return render(request, 'goal_detail.html', {'goal': goal})
+# Reminder
+@login_required
+def reminderListView(request):
+    reminders = Reminder.objects.all()
+    return render(request, 'reminder_list.html', {'reminders': reminders})
+
+@login_required
+def createReminder(request):
+    form = ReminderCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            reminder = form.save()
+            messages.success(request, 'The reminder has been created successfully!')
+            return redirect('reminders')
+    else:
+        form = ReminderCreationForm()
+    
+    return render(request, 'reminder_create.html', {'form': form})
+
+@login_required
+def editReminder(request, pk):
+    reminder = get_object_or_404(Reminder, pk=pk)
+    if request.method == 'POST':
+        form = ReminderCreationForm(request.POST, instance=reminder)
+        if form.is_valid():
+            reminder = form.save()
+            messages.success(request, 'The reminder has been updated successfully!')
+            return redirect('reminders')
+    else:
+        form = ReminderCreationForm(instance=reminder)
+    
+    return render(request, 'reminder_edit.html', {'form': form})
+
+@login_required
+def deleteReminder(request, pk):
+    reminder = get_object_or_404(Reminder, pk=pk)
+    reminder.delete()
+    messages.success(request, 'The reminder has been deleted successfully!')
+    return redirect('reminders')
+
+@login_required
+def reminderDetailView(request, pk):
+    reminder = get_object_or_404(Reminder, pk=pk)
+    return render(request, 'reminder_detail.html', {'reminder': reminder})
+
+def savingsGoalListView(request):
+    savings_goals = SavingsGoal.objects.all()
+    return render(request, 'savings_goal_list.html', {'savings_goals': savings_goals})
+
+@login_required
+def createSavingsGoal(request):
+    form = SavingsGoalCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            savings_goal = form.save()
+            messages.success(request, 'The savings goal has been created successfully!')
+            return redirect('savings-goals')
+    else:
+        form = SavingsGoalCreationForm()
+    
+    return render(request, 'savings_goal_create.html', {'form': form})
+
+@login_required
+def editSavingsGoal(request, pk):
+    savings_goal = get_object_or_404(SavingsGoal, pk=pk)
+    if request.method == 'POST':
+        form = SavingsGoalCreationForm(request.POST, instance=savings_goal)
+        if form.is_valid():
+            savings_goal = form.save()
+            messages.success(request, 'The savings goal has been updated successfully!')
+            return redirect('savings-goals')
+    else:
+        form = SavingsGoalCreationForm(instance=savings_goal)
+    
+    return render(request, 'savings_goal_edit.html', {'form': form})
+
+@login_required
+def deleteSavingsGoal(request, pk):
+    savings_goal = get_object_or_404(SavingsGoal, pk=pk)
+    savings_goal.delete()
+    messages.success(request, 'The savings goal has been deleted successfully!')
+    return redirect('savings-goals')
+
+@login_required
+def savingsGoalDetailView(request, pk):
+    savings_goal = get_object_or_404(SavingsGoal, pk=pk)
+    return render(request, 'savings_goal_detail.html', {'savings_goal': savings_goal})
+
+@login_required
+def taxListView(request):
+    taxes = Tax.objects.all()
+    return render(request, 'tax_list.html', {'taxes': taxes})
+
+@login_required
+def createTax(request):
+    form = TaxCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            tax = form.save()
+            messages.success(request, 'The tax has been created successfully!')
+            return redirect('taxes')
+    else:
+        form = TaxCreationForm()
+    
+    return render(request, 'tax_create.html', {'form': form})
+
+@login_required
+def editTax(request, pk):
+    tax = get_object_or_404(Tax, pk=pk)
+    if request.method == 'POST':
+        form = TaxCreationForm(request.POST, instance=tax)
+        if form.is_valid():
+            tax = form.save()
+            messages.success(request, 'The tax has been updated successfully!')
+            return redirect('taxes')
+    else:
+        form = TaxCreationForm(instance=tax)
+    
+    return render(request, 'tax_edit.html', {'form': form})
+
+@login_required
+def deleteTax(request, pk):
+    tax = get_object_or_404(Tax, pk=pk)
+    tax.delete()
+    messages.success(request, 'The tax has been deleted successfully!')
+    return redirect('taxes')
+
+@login_required
+def taxDetailView(request, pk):
+    tax = get_object_or_404(Tax, pk=pk)
+    return render(request, 'tax_detail.html', {'tax': tax})
+
+@login_required
+def reportListView(request):
+    reports = Report.objects.all()
+    return render(request, 'report_list.html', {'reports': reports})
+
+@login_required
+def createReport(request):
+    form = ReportCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            report = form.save()
+            messages.success(request, 'The report has been created successfully!')
+            return redirect('reports')
+    else:
+        form = ReportCreationForm()
+    
+    return render(request, 'report_create.html', {'form': form})
+
+@login_required
+def editReport(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    if request.method == 'POST':
+        form = ReportCreationForm(request.POST, instance=report)
+        if form.is_valid():
+            report = form.save()
+            messages.success(request, 'The report has been updated successfully!')
+            return redirect('reports')
+    else:
+        form = ReportCreationForm(instance=report)
+    
+    return render(request, 'report_edit.html', {'form': form})
+
+@login_required
+def deleteReport(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    report.delete()
+    messages.success(request, 'The report has been deleted successfully!')
+    return redirect('reports')
+
+@login_required
+def reportDetailView(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    return render(request, 'report_detail.html', {'report': report})

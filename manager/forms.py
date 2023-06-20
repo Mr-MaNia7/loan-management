@@ -40,7 +40,6 @@ class TransactionCreationForm(forms.ModelForm):
         widgets = {
             'date': DateInput(attrs={'type': 'date'}),
         }
-
 class GoalCreationForm(forms.ModelForm):
     class Meta:
         model = Goal
@@ -48,3 +47,28 @@ class GoalCreationForm(forms.ModelForm):
         widgets = {
             'deadline': DateInput(attrs={'type': 'date'}),
         }
+class ReminderCreationForm(forms.ModelForm):
+    class Meta:
+        model = Reminder
+        fields = ['user', 'name', 'description', 'date']
+        widgets = {
+            'date': DateInput(attrs={'type': 'date'}),
+        }
+
+class SavingsGoalCreationForm(forms.ModelForm):
+    class Meta:
+        model = SavingsGoal
+        fields = ['user', 'name', 'target_amount', 'current_amount', 'deadline']
+        widgets = {
+            'deadline': DateInput(attrs={'type': 'date'}),
+        }
+
+class TaxCreationForm(forms.ModelForm):
+    class Meta:
+        model = Tax
+        fields = ['user', 'name', 'rate']
+
+class ReportCreationForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = ['user', 'name', 'description', 'start_date', 'end_date']

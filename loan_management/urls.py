@@ -60,4 +60,31 @@ urlpatterns = [
     path('goals/edit/<int:pk>/', views.editGoal, name='edit-goal'),
     path('goals/delete/<int:pk>/', views.deleteGoal, name='delete-goal'),
 
+    # Reminder
+    path('reminders/', views.reminderListView, name='reminders'),
+    path('reminders/create/', views.createReminder, name='create-reminder'),
+    path('reminders/edit/<int:pk>/', views.editReminder, name='edit-reminder'),
+    path('reminders/delete/<int:pk>/', views.deleteReminder, name='delete-reminder'),
+    path('reminders/<int:pk>/', views.reminderDetailView, name='detail-reminder'),
+
+    # SavingsGoal
+    path('savings-goals/', views.savingsGoalListView, name='savings-goals'),
+    path('savings-goals/create/', views.createSavingsGoal, name='create-savings-goal'),
+    path('savings-goals/edit/<int:pk>/', views.editSavingsGoal, name='edit-savings-goal'),
+    path('savings-goals/delete/<int:pk>/', views.deleteSavingsGoal, name='delete-savings-goal'),
+    path('savings-goals/<int:pk>/', views.savingsGoalDetailView, name='detail-savings-goal'),
+    
+    # Tax
+    path('taxes/', views.taxListView, name='taxes'),
+    path('taxes/create/', views.createTax, name='create-tax'),
+    path('taxes/edit/<int:pk>/', views.editTax, name='edit-tax'),
+    path('taxes/delete/<int:pk>/', views.deleteTax, name='delete-tax'),
+    path('taxes/<int:pk>/', views.taxDetailView, name='detail-tax'),
+
+    # Report
+    path('reports/', views.reportListView, name='reports'),
+    path('reports/create/', views.createReport, name='create-report'),
+    path('reports/edit/<int:pk>/', views.editReport, name='edit-report'),
+    path('reports/delete/<int:pk>/', views.deleteReport, name='delete-report'),
+    path('reports/<int:pk>/', views.reportDetailView, name='detail-report'),
 ]
