@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Accounts | OnRadar</title>
+  <title>Reports | OnRadar</title>
 </head>
 <body>
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-account' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-report' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
     </div>
-    <h1 class="text-center">Accounts List</h1>
-    {% if accounts %}
+    <h1 class="text-center">Reports List</h1>
+    {% if reports %}
       <div class="d-flex justify-content-center">
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
@@ -29,19 +29,19 @@
               </tr>
             </thead>
             <tbody>
-              {% for account in accounts %}
+              {% for report in reports %}
                 <tr>
-                  <th scope="row">{{account.account_id}}</th>
-                  <td><a href="{% url 'detail-account' pk=account.account_id %}" class="text-decoration-none link-dark">{{account.name}}</a></td>
-                  <td>{{account.type}}</td>
-                  <td>{{account.balance}}</td>
-                  <td>{{account.interest_rate}}</td>
-                  <td>{{account.user_id}}</td>
+                  <th scope="row">{{report.report_id}}</th>
+                  <td><a href="{% url 'detail-report' pk=report.report_id %}" class="text-decoration-none link-dark">{{report.name}}</a></td>
+                  <td>{{report.type}}</td>
+                  <td>{{report.balance}}</td>
+                  <td>{{report.interest_rate}}</td>
+                  <td>{{report.user_id}}</td>
                   <td>
-                    <a class="me-2" href="{% url 'edit-account' pk=account.account_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
-                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-account' pk=account.account_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <a class="me-2" href="{% url 'edit-report' pk=report.report_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-report' pk=report.report_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
                   </td>
-                  <td><a class="me-2" href="{% url 'detail-account' pk=account.account_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                  <td><a class="me-2" href="{% url 'detail-report' pk=report.report_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -49,7 +49,7 @@
         </div>
       </div>
       {% else %}
-      <h3 class="me-5 text-info text-center">There are no accounts to display!</h3>
+      <h3 class="me-5 text-info text-center">There are no reports to display!</h3>
       {% endif %}
       <h3 class="text-center my-5">
         <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
@@ -64,7 +64,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete this account?</p>
+          <p>Are you sure you want to permanently delete this report?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

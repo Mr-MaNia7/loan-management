@@ -2,42 +2,42 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Account Detail - {{account.name}} | On Radar</title>
+  <title>Tax Detail - {{tax.name}} | On Radar</title>
 </head>
 <body>
   {% include 'header.html' %}
   
   <div class="container-fluid my-5">
     <div class="container">
-      <h2 class="text-center">Account Information</h2>
+      <h2 class="text-center">Tax Information</h2>
       
       <div class="d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{account.name}}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{tax.name}}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Account name - <b>@{{account.name}}</b></li>
-            <li class="list-group-item">Account type - <b>@{{account.type}}</b></li>
-            <li class="list-group-item">Balance - <b>${{account.balance}}</b></li>
-            <li class="list-group-item">Interest - <b>{{account.interest_rate}}</b></li>
-            <li class="list-group-item">User - <b>{{account.user_id}}</b></li>
+            <li class="list-group-item">Tax name - <b>@{{tax.name}}</b></li>
+            <li class="list-group-item">Tax type - <b>@{{tax.type}}</b></li>
+            <li class="list-group-item">Balance - <b>${{tax.balance}}</b></li>
+            <li class="list-group-item">Interest - <b>{{tax.interest_rate}}</b></li>
+            <li class="list-group-item">User - <b>{{tax.user_id}}</b></li>
           </ul>
           <div class="card-body">
-            <a href="{% url 'edit-account' pk=account.account_id %}" class="me-2">Edit Account</a>
+            <a href="{% url 'edit-tax' pk=tax.tax_id %}" class="me-2">Edit Tax</a>
           </div>
 
           <div class="card-footer text-muted">
             <div>
-              Created at - {{account.created_at}}
+              Created at - {{tax.created_at}}
             </div>
             <div>
-              Last updated at - {{account.updated_at}}
+              Last updated at - {{tax.updated_at}}
             </div>
           </div>
           <div class="card-footer text-muted">
-            <a href="{% url 'accounts' %}" class="text-decoration-none btn btn-primary me-2">Accounts</a>
-            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-account' pk=account.account_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Account</a>
+            <a href="{% url 'taxs' %}" class="text-decoration-none btn btn-primary me-2">Taxs</a>
+            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-tax' pk=tax.tax_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Tax</a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete this account?</p>
+          <p>Are you sure you want to permanently delete this tax?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
