@@ -66,6 +66,44 @@
             </ul>
           </li>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Reminders
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'reminders' %}">All Reminders</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-reminder' %}">Add Reminder</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Reports
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'reports' %}">All Reports</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-report' %}">Add Report</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Saving Goals
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'savings-goals' %}">All Saving Goals</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-savings-goal' %}">Add Saving Goal</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Taxes
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'taxes' %}">All Taxes</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-tax' %}">Add Tax</a></li>
+            </ul>
+          </li>
+
         </ul>
   
         <!-- Right links -->

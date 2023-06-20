@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Create Account | On Radar</title>
+  <title>Create Reminder | On Radar</title>
 </head>
 <body>
 
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
-    <h1 class="text-center mb-3">Create Account</h1>
+    <h1 class="text-center mb-3">Create Reminder</h1>
     <div class="d-flex justify-content-center">
       <div class="card" style="width: 30rem;">
         <form method='post'> 
@@ -18,7 +18,7 @@
             {{ form.as_p }}
           </div>
           <div class="card-footer d-flex justify-content-around">
-            <a href="{% url 'accounts' %}" class="text-decoration-none btn btn-secondary me-2">Cancel</a>
+            <a href="{% url 'reminders' %}" class="text-decoration-none btn btn-secondary me-2">Cancel</a>
             <input class="btn btn-primary" type="submit" value="Submit">
           </div>
         </form>
