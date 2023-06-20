@@ -46,14 +46,14 @@
               {% endfor %}
             </tbody>
           </table>
-          <div class="text-center">
-            <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
-          </div>
         </div>
       </div>
-    {% else %}
+      {% else %}
       <h3 class="me-5 text-info text-center">There are no accounts to display!</h3>
-    {% endif %}
+      {% endif %}
+      <h3 class="text-center my-5">
+        <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
+      </h3>
   </div>
 
   <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
