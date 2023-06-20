@@ -21,6 +21,7 @@ from manager import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.showHomeView, name='home'),
+    # USER
     path('register/', views.registerUser, name='register'),
     path('accounts/login/', views.loginView, name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
@@ -28,11 +29,17 @@ urlpatterns = [
     path('users/delete/<int:pk>', views.deleteUser, name='delete-user'),
     path('users/<int:pk>', views.userDetailView, name='detail-view'),
     path('users/security/<int:pk>', views.editSecurity, name='security'),
-   
+    # ACCOUNT
     path('accounts/', views.accountListView, name='accounts'),
     path('accounts/<int:pk>', views.accountDetailView, name = 'detail-account'),
     path('accounts/create/', views.createAccount, name='create-account'),
     path('accounts/edit/<int:pk>', views.editAccount, name='edit-account'),
     path('accounts/delete/<int:pk>', views.deleteAccount, name='delete-account'),
+    # CATEGORY
+    path('categories/', views.categoryListView, name='categories'),
+    path('categories/<int:pk>/', views.categoryDetailView, name='detail-category'),
+    path('categories/create/', views.createCategory, name='create-category'),
+    path('categories/edit/<int:pk>/', views.editCategory, name='edit-category'),
+    path('categories/delete/<int:pk>/', views.deleteCategory, name='delete-category'),
 
 ]

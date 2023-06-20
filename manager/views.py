@@ -87,6 +87,7 @@ def deleteUser(request, pk):
     messages.success(request,  'The user has been deleted successfully!')
     return redirect('home')
 
+# ACCOUNT
 @login_required
 def createAccount(request):
     form = AccountCreationForm(request.POST)
@@ -133,4 +134,53 @@ def deleteAccount(request, pk):
 @login_required
 def accountDetailView(request, pk):
     account = get_object_or_404(Account, pk=pk)
-    return render(request, 'account_detail.html', {'account': account}) 
+    return render(request, 'account_detail.html', {'account': account})
+
+# CATEGORY
+@login_required
+def createCategory(request):
+    form = CategoryCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.user = request.user
+            category.save()
+            messages.success(request, 'The Category has been created successfully!')
+            return redirect('categories')
+    else:
+        form = CategoryCreationForm()
+    
+    return render(request, 'category_create.html', {'form': form})
+
+@login_required
+def editCategory(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    if request.method == 'POST':
+        form = CategoryCreationForm(request.POST, instance=category)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.user = request.user
+            category.save()
+            messages.success(request, 'The category has been updated successfully!')
+            return redirect('categories')
+    else:
+        form = CategoryCreationForm(instance=category)
+    
+    return render(request, 'category_edit.html', {'form': form})
+
+@login_required
+def categoryListView(request):
+    categories = Category.objects.all()
+    return render(request, 'category_list.html', {'categories': categories})
+
+@login_required
+def deleteCategory(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    messages.success(request, 'The category has been deleted successfully!')
+    return redirect('categories')
+
+@login_required
+def categoryDetailView(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    return render(request, 'category_detail.html', {'category': category})

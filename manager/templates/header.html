@@ -15,15 +15,27 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Accounts
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'accounts' %}">All Accounts</a></li>
-              <li><a class="dropdown-item" href="{% url 'create-account' %}">New Account</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-account' %}">Add Account</a></li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'categories' %}">All Categories</a></li>
+              <li><a class="dropdown-item" href="{% url 'create-category' %}">Add Category</a></li>
+            </ul>
+          </li>
+
         </ul>
   
         <!-- Right links -->

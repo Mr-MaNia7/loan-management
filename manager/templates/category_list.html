@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Accounts | OnRadar</title>
+  <title>Categorys | OnRadar</title>
 </head>
 <body>
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-account' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-category' %}"><i class="fa-solid fa-plus"></i> ADD CATEGORY</a>
     </div>
-    <h1 class="text-center">Accounts List</h1>
-    {% if accounts %}
+    <h1 class="text-center">Categories List</h1>
+    {% if categories %}
       <div class="d-flex justify-content-center">
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
@@ -20,28 +20,24 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Interest</th>
                 <th scope="col">User</th>
+                <th scope="col">Parent</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
             </thead>
             <tbody>
-              {% for account in accounts %}
+              {% for category in categories %}
                 <tr>
-                  <th scope="row">{{account.account_id}}</th>
-                  <td><a href="{% url 'detail-account' pk=account.account_id %}" class="text-decoration-none link-dark">{{account.name}}</a></td>
-                  <td>{{account.type}}</td>
-                  <td>{{account.balance}}</td>
-                  <td>{{account.interest_rate}}</td>
-                  <td>{{account.user_id}}</td>
+                  <th scope="row">{{category.category_id}}</th>
+                  <td><a href="{% url 'detail-category' pk=category.category_id %}" class="text-decoration-none link-dark">{{category.name}}</a></td>
+                  <td>{{category.user_id}}</td>
+                  <td>{{category.parent}}</td>
                   <td>
-                    <a class="me-2" href="{% url 'edit-account' pk=account.account_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
-                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-account' pk=account.account_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <a class="me-2" href="{% url 'edit-category' pk=category.category_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-category' pk=category.category_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
                   </td>
-                  <td><a class="me-2" href="{% url 'detail-account' pk=account.account_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                  <td><a class="me-2" href="{% url 'detail-category' pk=category.category_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -52,7 +48,7 @@
         </div>
       </div>
     {% else %}
-      <h3 class="me-5 text-info text-center">There are no accounts to display!</h3>
+      <h3 class="me-5 text-info text-center">There are no categories to display!</h3>
     {% endif %}
   </div>
 
@@ -64,7 +60,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete this account?</p>
+          <p>Are you sure you want to permanently delete this category?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

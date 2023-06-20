@@ -17,3 +17,8 @@ class AccountCreationForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['name', 'type', 'balance', 'interest_rate', 'user_id']
+
+class CategoryCreationForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['user', 'name', 'parent']
