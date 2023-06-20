@@ -41,5 +41,12 @@ urlpatterns = [
     path('categories/create/', views.createCategory, name='create-category'),
     path('categories/edit/<int:pk>/', views.editCategory, name='edit-category'),
     path('categories/delete/<int:pk>/', views.deleteCategory, name='delete-category'),
+    # BUDGET
+    path('budgets/', views.budgetListView, name='budgets'),
+    path('budgets/<int:pk>/', views.budgetDetailView, name='detail-budget'),
+    path('budgets/create/', views.createBudget, name='create-budget'),
+    path('budgets/edit/<int:pk>/', views.editBudget, name='edit-budget'),
+    path('budgets/delete/<int:pk>/', views.deleteBudget, name='delete-budget'),
+
 
 ]

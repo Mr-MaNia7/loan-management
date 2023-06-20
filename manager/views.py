@@ -184,3 +184,54 @@ def deleteCategory(request, pk):
 def categoryDetailView(request, pk):
     category = get_object_or_404(Category, pk=pk)
     return render(request, 'category_detail.html', {'category': category})
+
+# BUDGET
+@login_required
+def createBudget(request):
+    if request.method == 'POST':
+        form = BudgetCreationForm(request.POST)
+        if form.is_valid():
+            budget = form.save(commit=False)
+            budget.user = request.user
+            budget.save()
+            messages.success(request, 'The budget has been created successfully!')
+            return redirect('budgets')
+    else:
+        form = BudgetCreationForm()
+    
+    return render(request, 'budget_create.html', {'form': form})
+
+@login_required
+def editBudget(request, pk):
+    budget = get_object_or_404(Budget, pk=pk)
+    if request.method == 'POST':
+        form = BudgetCreationForm(request.POST, instance=budget)
+        if form.is_valid():
+            budget = form.save(commit=False)
+            budget.user = request.user
+            budget.save()
+            messages.success(request, 'The budget has been updated successfully!')
+            return redirect('budgets')
+    else:
+        form = BudgetCreationForm(instance=budget)
+    
+    return render(request, 'budget_edit.html', {'form': form})
+
+@login_required
+def budgetListView(request):
+    budgets = Budget.objects.all()
+    return render(request, 'budget_list.html', {'budgets': budgets})
+
+@login_required
+def deleteBudget(request, pk):
+    budget = get_object_or_404(Budget, pk=pk)
+    budget.delete()
+    messages.success(request, 'The budget has been deleted successfully!')
+    return redirect('budgets')
+
+@login_required
+def budgetDetailView(request, pk):
+    budget = get_object_or_404(Budget, pk=pk)
+    return render(request, 'budget_detail.html', {'budget': budget})
+
+# 

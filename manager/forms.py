@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import DateInput
 
 
 class UserCreateForm(forms.ModelForm):
@@ -22,3 +23,13 @@ class CategoryCreationForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['user', 'name', 'parent']
+
+class BudgetCreationForm(forms.ModelForm):
+    class Meta:
+        model = Budget
+        fields = ['user', 'category', 'amount', 'start_date', 'end_date']
+        widgets = {
+            'start_date': DateInput(attrs={'type': 'date'}),
+            'end_date': DateInput(attrs={'type': 'date'}),
+        }
+
