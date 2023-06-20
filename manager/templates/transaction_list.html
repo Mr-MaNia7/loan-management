@@ -2,44 +2,42 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Budgets | OnRadar</title>
+  <title>Transactions | OnRadar</title>
 </head>
 <body>
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-budget' %}"><i class="fa-solid fa-plus"></i> ADD BUDGET</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-transaction' %}"><i class="fa-solid fa-plus"></i> ADD TRANSACTION</a>
     </div>
-    <h1 class="text-center">Budgets List</h1>
-    {% if budgets %}
+    <h1 class="text-center">Transactions List</h1>
+    {% if transactions %}
       <div class="d-flex justify-content-center">
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">User</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
+                <th scope="col">Account</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
             </thead>
             <tbody>
-              {% for budget in budgets %}
+              {% for transaction in transactions %}
                 <tr>
-                  <th scope="row">{{budget.budget_id}}</th>
-                  <td>{{budget.user}}</td>
-                  <td>{{budget.amount}}</td>
-                  <td>{{budget.start_date}}</td>
-                  <td>{{budget.end_date}}</td>
+                  <th scope="row">{{transaction.transaction_id}}</th>
+                  <td><a href="{% url 'detail-transaction' pk=transaction.transaction_id %}" class="text-decoration-none link-dark">{{transaction.account}}</a></td>
+                  <td>{{transaction.category}}</td>
+                  <td>{{transaction.date}}</td>
                   <td>
-                    <a class="me-2" href="{% url 'edit-budget' pk=budget.budget_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
-                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-budget' pk=budget.budget_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <a class="me-2" href="{% url 'edit-transaction' pk=transaction.transaction_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-transaction' pk=transaction.transaction_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
                   </td>
-                  <td><a class="me-2" href="{% url 'detail-budget' pk=budget.budget_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                  <td><a class="me-2" href="{% url 'detail-transaction' pk=transaction.transaction_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -47,7 +45,7 @@
         </div>
       </div>
       {% else %}
-      <h3 class="me-5 text-info text-center">There are no budgets to display!</h3>
+      <h3 class="me-5 text-info text-center">There are no transactions to display!</h3>
       {% endif %}
       <h3 class="text-center my-5">
         <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
@@ -62,7 +60,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete this budget?</p>
+          <p>Are you sure you want to permanently delete this transaction?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

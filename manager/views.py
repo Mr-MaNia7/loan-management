@@ -234,4 +234,47 @@ def budgetDetailView(request, pk):
     budget = get_object_or_404(Budget, pk=pk)
     return render(request, 'budget_detail.html', {'budget': budget})
 
-# 
+# TRANSACTION
+@login_required
+def transactionListView(request):
+    transactions = Transaction.objects.all()
+    return render(request, 'transaction_list.html', {'transactions': transactions})
+
+@login_required
+def createTransaction(request):
+    form = TransactionCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            transaction = form.save()
+            messages.success(request, 'The transaction has been created successfully!')
+            return redirect('transactions')
+    else:
+        form = TransactionCreationForm()
+    
+    return render(request, 'transaction_create.html', {'form': form})
+
+@login_required
+def editTransaction(request, pk):
+    transaction = get_object_or_404(Transaction, pk=pk)
+    if request.method == 'POST':
+        form = TransactionCreationForm(request.POST, instance=transaction)
+        if form.is_valid():
+            transaction = form.save()
+            messages.success(request, 'The transaction has been updated successfully!')
+            return redirect('transactions')
+    else:
+        form = TransactionCreationForm(instance=transaction)
+    
+    return render(request, 'transaction_edit.html', {'form': form})
+
+@login_required
+def deleteTransaction(request, pk):
+    transaction = get_object_or_404(Transaction, pk=pk)
+    transaction.delete()
+    messages.success(request, 'The transaction has been deleted successfully!')
+    return redirect('transactions')
+
+@login_required
+def transactionDetailView(request, pk):
+    transaction = get_object_or_404(Transaction, pk=pk)
+    return render(request, 'transaction_detail.html', {'transaction': transaction})

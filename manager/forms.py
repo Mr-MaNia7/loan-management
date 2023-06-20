@@ -33,3 +33,11 @@ class BudgetCreationForm(forms.ModelForm):
             'end_date': DateInput(attrs={'type': 'date'}),
         }
 
+class TransactionCreationForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['account', 'category', 'amount', 'date', 'description']
+        widgets = {
+            'date': DateInput(attrs={'type': 'date'}),
+        }
+

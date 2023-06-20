@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Transaction Detail - {{transaction.name}} | On Radar</title>
+</head>
+<body>
+  {% include 'header.html' %}
+  
+  <div class="container-fluid my-5">
+    <div class="container">
+      <h2 class="text-center">Transaction Information</h2>
+      
+      <div class="d-flex justify-content-center">
+        <div class="card text-center" style="width: 30rem;">
+          <div class="card-body">
+            <h5 class="card-title">Transaction Amount - ${{transaction.amount}}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Transaction account - <b>{{transaction.account}}</b></li>
+            <li class="list-group-item">Transaction category - <b>{{transaction.category}}</b></li>
+            <li class="list-group-item">Date - <b>{{transaction.date}}</b></li>
+            <li class="list-group-item">Description - <b>{{transaction.description}}</b></li>
+          </ul>
+          <div class="card-body">
+            <a href="{% url 'edit-transaction' pk=transaction.transaction_id %}" class="me-2">Edit Transaction</a>
+          </div>
+
+          <div class="card-footer text-muted">
+            <div>
+              Created at - {{transaction.created_at}}
+            </div>
+            <div>
+              Last updated at - {{transaction.updated_at}}
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            <a href="{% url 'transactions' %}" class="text-decoration-none btn btn-primary me-2">Transactions</a>
+            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-transaction' pk=transaction.transaction_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Transaction</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this transaction?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">
+            <a href="#" class="link-light text-decoration-none"><i class="fa-solid fa-trash"></i> Delete</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    const modal = document.getElementById('deleteConfirmation')
+    modal.addEventListener('show.bs.modal', event => {
+      const relatedButton = event.relatedTarget
+      const link = relatedButton.getAttribute('data-bs-link')
+      deleteButton = modal.querySelector('.modal-footer button a')
+      deleteButton.href = link
+    })
+  </script>
+
+</body>
+</html>
