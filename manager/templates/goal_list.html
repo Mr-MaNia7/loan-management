@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Goals | OnRadar</title>
+</head>
+<body>
+  {% include 'header.html' %}
+
+  <div class="container-fluid my-5">
+    <div class="float-end me-5">
+      <a class="text-decoration-none link-primary" href="{% url 'create-goal' %}"><i class="fa-solid fa-plus"></i> ADD GOAL</a>
+    </div>
+    <h1 class="text-center">Goals List</h1>
+    {% if goals %}
+      <div class="d-flex justify-content-center">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">User</th>
+                <th scope="col">Target Amount</th>
+                <th scope="col">Current Amount</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Edit/Delete</th>
+                <th scope="col">View</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for goal in goals %}
+                <tr>
+                  <th scope="row">{{goal.goal_id}}</th>
+                  <td><a href="{% url 'detail-goal' pk=goal.goal_id %}" class="text-decoration-none link-dark">{{goal.name}}</a></td>
+                  <td>{{goal.user}}</td>
+                  <td>{{goal.target_amount}}</td>
+                  <td>{{goal.current_amount}}</td>
+                  <td>{{goal.deadline}}</td>
+                  <td>
+                    <a class="me-2" href="{% url 'edit-goal' pk=goal.goal_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-goal' pk=goal.goal_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                  </td>
+                  <td><a class="me-2" href="{% url 'detail-goal' pk=goal.goal_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% else %}
+      <h3 class="me-5 text-info text-center">There are no goals to display!</h3>
+      {% endif %}
+      <h3 class="text-center my-5">
+        <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
+      </h3>
+  </div>
+
+  <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this goal?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">
+            <a href="#" class="link-light text-decoration-none"><i class="fa-solid fa-trash"></i> Delete</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+
+  <script>
+    const modal = document.getElementById('deleteConfirmation')
+    modal.addEventListener('show.bs.modal', event => {
+      const relatedButton = event.relatedTarget
+      const link = relatedButton.getAttribute('data-bs-link')
+      deleteButton = modal.querySelector('.modal-footer button a')
+      deleteButton.href = link
+    })
+  </script>
+
+</body>
+</html>

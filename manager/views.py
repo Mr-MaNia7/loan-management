@@ -278,3 +278,48 @@ def deleteTransaction(request, pk):
 def transactionDetailView(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk)
     return render(request, 'transaction_detail.html', {'transaction': transaction})
+# GOAL
+@login_required
+def goalListView(request):
+    goals = Goal.objects.all()
+    return render(request, 'goal_list.html', {'goals': goals})
+
+@login_required
+def createGoal(request):
+    form = GoalCreationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            goal = form.save()
+            messages.success(request, 'The goal has been created successfully!')
+            return redirect('goals')
+    else:
+        form = GoalCreationForm()
+    
+    return render(request, 'goal_create.html', {'form': form})
+
+@login_required
+def editGoal(request, pk):
+    goal = get_object_or_404(Goal, pk=pk)
+    if request.method == 'POST':
+        form = GoalCreationForm(request.POST, instance=goal)
+        if form.is_valid():
+            goal = form.save()
+            messages.success(request, 'The goal has been updated successfully!')
+            return redirect('goals')
+    else:
+        form = GoalCreationForm(instance=goal)
+    
+    return render(request, 'goal_edit.html', {'form': form})
+
+@login_required
+def deleteGoal(request, pk):
+    goal = get_object_or_404(Goal, pk=pk)
+    goal.delete()
+    messages.success(request, 'The goal has been deleted successfully!')
+    return redirect('goals')
+
+@login_required
+def goalDetailView(request, pk):
+    print('YES')
+    goal = get_object_or_404(Goal, pk=pk)
+    return render(request, 'goal_detail.html', {'goal': goal})

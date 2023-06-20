@@ -41,3 +41,10 @@ class TransactionCreationForm(forms.ModelForm):
             'date': DateInput(attrs={'type': 'date'}),
         }
 
+class GoalCreationForm(forms.ModelForm):
+    class Meta:
+        model = Goal
+        fields = ['user', 'name', 'description', 'target_amount', 'current_amount', 'deadline']
+        widgets = {
+            'deadline': DateInput(attrs={'type': 'date'}),
+        }

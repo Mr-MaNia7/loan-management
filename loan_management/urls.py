@@ -53,5 +53,11 @@ urlpatterns = [
     path('transactions/create/', views.createTransaction, name='create-transaction'),
     path('transactions/edit/<int:pk>/', views.editTransaction, name='edit-transaction'),
     path('transactions/delete/<int:pk>/', views.deleteTransaction, name='delete-transaction'),
+    # GOAL
+    path('goals/', views.goalListView, name='goals'),
+    path('goals/<int:pk>/', views.goalDetailView, name='detail-goal'),
+    path('goals/create/', views.createGoal, name='create-goal'),
+    path('goals/edit/<int:pk>/', views.editGoal, name='edit-goal'),
+    path('goals/delete/<int:pk>/', views.deleteGoal, name='delete-goal'),
 
 ]
