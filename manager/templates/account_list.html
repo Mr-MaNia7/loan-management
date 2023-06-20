@@ -8,48 +8,54 @@
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
-    <button class="btn btn-primary float-end me-5">
-      <a class="text-decoration-none link-light" href="{% url 'create-account' %}"><i class="fa-solid fa-plus"></i> New Account</a>
-    </button>
+    <div class="float-end me-5">
+      <a class="text-decoration-none link-primary" href="{% url 'create-account' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+    </div>
     <h1 class="text-center">Accounts List</h1>
-    <div class="d-flex justify-content-center">
-      <div class="table-responsive">
-        <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Balance</th>
-              <th scope="col">Interest</th>
-              <th scope="col">User</th>
-              <th scope="col">Edit/Delete</th>
-              <th scope="col">View</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for account in accounts %}
+    {% if accounts %}
+      <div class="d-flex justify-content-center">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
               <tr>
-                <th scope="row">{{account.account_id}}</th>
-                <td><a href="{% url 'detail-account' pk=account.account_id %}" class="text-decoration-none link-dark">{{account.name}}</a></td>
-                <td>{{account.type}}</td>
-                <td>{{account.balance}}</td>
-                <td>{{account.interest_rate}}</td>
-                <td>{{account.user_id}}</td>
-                <td>
-                  <a class="me-2" href="{% url 'edit-account' pk=account.account_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
-                  <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-account' pk=account.account_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
-                </td>
-                <td><a class="me-2" href="{% url 'detail-account' pk=account.account_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Interest</th>
+                <th scope="col">User</th>
+                <th scope="col">Edit/Delete</th>
+                <th scope="col">View</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <div class="text-center">
-          <a href="{% url 'home' %}" class="text-decoration-none btn btn-primary me-2">Home</a>
+            </thead>
+            <tbody>
+              {% for account in accounts %}
+                <tr>
+                  <th scope="row">{{account.account_id}}</th>
+                  <td><a href="{% url 'detail-account' pk=account.account_id %}" class="text-decoration-none link-dark">{{account.name}}</a></td>
+                  <td>{{account.type}}</td>
+                  <td>{{account.balance}}</td>
+                  <td>{{account.interest_rate}}</td>
+                  <td>{{account.user_id}}</td>
+                  <td>
+                    <a class="me-2" href="{% url 'edit-account' pk=account.account_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-account' pk=account.account_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                  </td>
+                  <td><a class="me-2" href="{% url 'detail-account' pk=account.account_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                </tr>
+              {% comment %} {% empty %}
+                {% endcomment %}
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="text-center">
+            <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
+          </div>
         </div>
       </div>
-    </div>
+    {% else %}
+      <h3 class="me-5 text-info text-center">There are no accounts to display!</h3>
+    {% endif %}
   </div>
 
   <div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
