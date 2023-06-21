@@ -368,6 +368,7 @@ def reminderDetailView(request, pk):
     reminder = get_object_or_404(Reminder, pk=pk)
     return render(request, 'reminder_detail.html', {'reminder': reminder})
 
+# SAVINGGOALS
 def savingsGoalListView(request):
     savings_goals = SavingsGoal.objects.all()
     return render(request, 'savings_goal_list.html', {'savings_goals': savings_goals})
@@ -411,6 +412,7 @@ def savingsGoalDetailView(request, pk):
     savings_goal = get_object_or_404(SavingsGoal, pk=pk)
     return render(request, 'savings_goal_detail.html', {'savings_goal': savings_goal})
 
+# TAX
 @login_required
 def taxListView(request):
     taxes = Tax.objects.all()

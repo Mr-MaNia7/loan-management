@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Savings-goals Detail - {{savings-goals.name}} | On Radar</title>
+  <title>Savings-goals Detail - {{savings_goal.name}} | On Radar</title>
 </head>
 <body>
   {% include 'header.html' %}
@@ -14,30 +14,27 @@
       <div class="d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{savings-goals.name}}</h5>
+            <h5 class="card-title">Saving Goal Name: {{savings_goal.name}}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Savings-goals name - <b>@{{savings-goals.name}}</b></li>
-            <li class="list-group-item">Savings-goals type - <b>@{{savings-goals.type}}</b></li>
-            <li class="list-group-item">Balance - <b>${{savings-goals.balance}}</b></li>
-            <li class="list-group-item">Interest - <b>{{savings-goals.interest_rate}}</b></li>
-            <li class="list-group-item">User - <b>{{savings-goals.user_id}}</b></li>
+            <li class="list-group-item">Savings-goals user - <b>@{{savings_goal.user}}</b></li>
+            <li class="list-group-item">Savings-goals user - <b>@{{savings_goal.user}}</b></li>
+            <li class="list-group-item">Target Amount - <b>${{savings_goal.target_amount}}</b></li>
+            <li class="list-group-item">Current Amount - <b>${{savings_goal.current_amount}}</b></li>
+            <li class="list-group-item">Deadline - <b>{{savings_goal.deadline}}</b></li>
           </ul>
           <div class="card-body">
-            <a href="{% url 'edit-savings-goals' pk=savings-goals.savings-goals_id %}" class="me-2">Edit Savings-goals</a>
+            <a href="{% url 'edit-savings-goal' pk=savings_goal.savings_goal_id %}" class="me-2">Edit Savings-goals</a>
           </div>
 
           <div class="card-footer text-muted">
             <div>
-              Created at - {{savings-goals.created_at}}
-            </div>
-            <div>
-              Last updated at - {{savings-goals.updated_at}}
+              Created at - {{savings_goal.created_at}}
             </div>
           </div>
           <div class="card-footer text-muted">
-            <a href="{% url 'savings-goalss' %}" class="text-decoration-none btn btn-primary me-2">Savings-goalss</a>
-            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-savings-goals' pk=savings-goals.savings-goals_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Savings-goals</a>
+            <a href="{% url 'savings-goals' %}" class="text-decoration-none btn btn-primary me-2">Savings-goals</a>
+            <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-savings-goal' pk=savings_goal.savings_goal_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Savings-goals</a>
           </div>
         </div>
       </div>
@@ -52,7 +49,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to permanently delete this savings-goals?</p>
+          <p>Are you sure you want to permanently delete this savings_goal?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

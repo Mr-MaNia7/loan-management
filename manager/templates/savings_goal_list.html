@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Savings-goalss | OnRadar</title>
+  <title>Savings-goals | OnRadar</title>
 </head>
 <body>
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-savings-goals' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-savings-goal' %}"><i class="fa-solid fa-plus"></i> ADD SAVING GOALS</a>
     </div>
-    <h1 class="text-center">Savings-goalss List</h1>
-    {% if savings-goalss %}
+    <h1 class="text-center">Savings-goals List</h1>
+    {% if savings_goals %}
       <div class="d-flex justify-content-center">
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
@@ -20,28 +20,28 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Interest</th>
                 <th scope="col">User</th>
+                <th scope="col">Target Amount</th>
+                <th scope="col">Current Amount</th>
+                <th scope="col">Deadline</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
             </thead>
             <tbody>
-              {% for savings-goals in savings-goalss %}
+              {% for savings_goal in savings_goals %}
                 <tr>
-                  <th scope="row">{{savings-goals.savings-goals_id}}</th>
-                  <td><a href="{% url 'detail-savings-goals' pk=savings-goals.savings-goals_id %}" class="text-decoration-none link-dark">{{savings-goals.name}}</a></td>
-                  <td>{{savings-goals.type}}</td>
-                  <td>{{savings-goals.balance}}</td>
-                  <td>{{savings-goals.interest_rate}}</td>
-                  <td>{{savings-goals.user_id}}</td>
+                  <th scope="row">{{savings_goal.savings_goal_id}}</th>
+                  <td><a href="{% url 'detail-savings-goal' pk=savings_goal.savings_goal_id %}" class="text-decoration-none link-dark">{{savings_goal.name}}</a></td>
+                  <td>{{savings_goal.user}}</td>
+                  <td>{{savings_goal.target_amount}}</td>
+                  <td>{{savings_goal.current_amount}}</td>
+                  <td>{{savings_goal.deadline}}</td>
                   <td>
-                    <a class="me-2" href="{% url 'edit-savings-goals' pk=savings-goals.savings-goals_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
-                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-savings-goals' pk=savings-goals.savings-goals_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <a class="me-2" href="{% url 'edit-savings-goal' pk=savings_goal.savings_goal_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
+                    <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-savings-goal' pk=savings_goal.savings_goal_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
                   </td>
-                  <td><a class="me-2" href="{% url 'detail-savings-goals' pk=savings-goals.savings-goals_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
+                  <td><a class="me-2" href="{% url 'detail-savings-goal' pk=savings_goal.savings_goal_id %}"><i class="fa-solid fa-eye"></i> View</a> </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -49,7 +49,7 @@
         </div>
       </div>
       {% else %}
-      <h3 class="me-5 text-info text-center">There are no savings-goalss to display!</h3>
+      <h3 class="me-5 text-info text-center">There are no savings-goals to display!</h3>
       {% endif %}
       <h3 class="text-center my-5">
         <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
