@@ -14,14 +14,11 @@
       <div class="d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title"><i class="fa-solid fa-file-invoice"></i> {{tax.name}}</h5>
+            <h5 class="card-title">Tax Name: {{tax.name}}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Tax name - <b>@{{tax.name}}</b></li>
-            <li class="list-group-item">Tax type - <b>@{{tax.type}}</b></li>
-            <li class="list-group-item">Balance - <b>${{tax.balance}}</b></li>
-            <li class="list-group-item">Interest - <b>{{tax.interest_rate}}</b></li>
-            <li class="list-group-item">User - <b>{{tax.user_id}}</b></li>
+            <li class="list-group-item">User - <b>{{tax.user}}</b></li>
+            <li class="list-group-item">Tax rate - <b>@{{tax.rate}}</b></li>
           </ul>
           <div class="card-body">
             <a href="{% url 'edit-tax' pk=tax.tax_id %}" class="me-2">Edit Tax</a>
@@ -31,12 +28,9 @@
             <div>
               Created at - {{tax.created_at}}
             </div>
-            <div>
-              Last updated at - {{tax.updated_at}}
-            </div>
           </div>
           <div class="card-footer text-muted">
-            <a href="{% url 'taxs' %}" class="text-decoration-none btn btn-primary me-2">Taxs</a>
+            <a href="{% url 'taxes' %}" class="text-decoration-none btn btn-primary me-2">Taxes</a>
             <a class="btn btn-danger" href="#" data-bs-link="{% url 'delete-tax' pk=tax.tax_id %}" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete Tax</a>
           </div>
         </div>

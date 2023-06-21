@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   {% include 'head.html' %}
-  <title>Taxs | OnRadar</title>
+  <title>Taxes | OnRadar</title>
 </head>
 <body>
   {% include 'header.html' %}
 
   <div class="container-fluid my-5">
     <div class="float-end me-5">
-      <a class="text-decoration-none link-primary" href="{% url 'create-tax' %}"><i class="fa-solid fa-plus"></i> ADD ACCOUNT</a>
+      <a class="text-decoration-none link-primary" href="{% url 'create-tax' %}"><i class="fa-solid fa-plus"></i> ADD TAX</a>
     </div>
-    <h1 class="text-center">Taxs List</h1>
-    {% if taxs %}
+    <h1 class="text-center">Taxes List</h1>
+    {% if taxes %}
       <div class="d-flex justify-content-center">
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
@@ -20,23 +20,19 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Interest</th>
                 <th scope="col">User</th>
+                <th scope="col">Rate</th>
                 <th scope="col">Edit/Delete</th>
                 <th scope="col">View</th>
               </tr>
             </thead>
             <tbody>
-              {% for tax in taxs %}
+              {% for tax in taxes %}
                 <tr>
                   <th scope="row">{{tax.tax_id}}</th>
                   <td><a href="{% url 'detail-tax' pk=tax.tax_id %}" class="text-decoration-none link-dark">{{tax.name}}</a></td>
-                  <td>{{tax.type}}</td>
-                  <td>{{tax.balance}}</td>
-                  <td>{{tax.interest_rate}}</td>
-                  <td>{{tax.user_id}}</td>
+                  <td>{{tax.user}}</td>
+                  <td>{{tax.rate}}</td>
                   <td>
                     <a class="me-2" href="{% url 'edit-tax' pk=tax.tax_id %}"><i class="fa-solid fa-pen"></i> Edit</a> 
                     <a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" data-bs-link="{% url 'delete-tax' pk=tax.tax_id %}"><i class="fa-solid fa-trash"></i> Delete</a>
@@ -49,7 +45,7 @@
         </div>
       </div>
       {% else %}
-      <h3 class="me-5 text-info text-center">There are no taxs to display!</h3>
+      <h3 class="me-5 text-info text-center">There are no taxes to display!</h3>
       {% endif %}
       <h3 class="text-center my-5">
         <a href="{% url 'home' %}" class="text-decoration-none link-primary me-2"><i class="fa-solid fa-house"></i> Home</a>
