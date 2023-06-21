@@ -10,8 +10,28 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 def showHomeView(request):
     accounts = Account.objects.all()
-    context = {'accounts': accounts}
-    return render(request, "index.html", context)
+    budgets = Budget.objects.all()
+    categories = Category.objects.all()
+    taxes = Tax.objects.all()
+    reports = Report.objects.all()
+    reminders = Reminder.objects.all()
+    savings_goals = SavingsGoal.objects.all()
+    goals = Goal.objects.all()
+    transactions = Transaction.objects.all()
+
+    context = {
+        'accounts': accounts,
+        'budgets': budgets,
+        'categories': categories,
+        'taxes': taxes,
+        'reports': reports,
+        'reminders': reminders,
+        'savings_goals': savings_goals,
+        'goals': goals,
+        'transactions': transactions,
+    }
+
+    return render(request, 'index.html', context)
 
 def registerUser(request):
     if request.method == 'POST':
@@ -278,6 +298,7 @@ def deleteTransaction(request, pk):
 def transactionDetailView(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk)
     return render(request, 'transaction_detail.html', {'transaction': transaction})
+
 # GOAL
 @login_required
 def goalListView(request):
@@ -323,7 +344,8 @@ def goalDetailView(request, pk):
     print('YES')
     goal = get_object_or_404(Goal, pk=pk)
     return render(request, 'goal_detail.html', {'goal': goal})
-# Reminder
+
+# REMINDER
 @login_required
 def reminderListView(request):
     reminders = Reminder.objects.all()
@@ -457,6 +479,7 @@ def taxDetailView(request, pk):
     tax = get_object_or_404(Tax, pk=pk)
     return render(request, 'tax_detail.html', {'tax': tax})
 
+# REPORT
 @login_required
 def reportListView(request):
     reports = Report.objects.all()
